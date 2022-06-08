@@ -1,8 +1,8 @@
 defmodule CnabFinancial.CNABTest do
   use CnabFinancial.DataCase, async: true
 
-  alias Ecto.Changeset
   alias CnabFinancial.CNAB
+  alias Ecto.Changeset
 
   describe "changeset/2" do
     test "when all params are valid, returns a valid changeset" do

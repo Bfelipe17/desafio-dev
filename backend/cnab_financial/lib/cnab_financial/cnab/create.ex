@@ -1,4 +1,8 @@
 defmodule CnabFinancial.CNAB.Create do
+  @moduledoc """
+    Module that receive a file with CNABs and insert into database
+  """
+
   alias CnabFinancial.CNAB.Parser
   alias CnabFinancial.Repo
 

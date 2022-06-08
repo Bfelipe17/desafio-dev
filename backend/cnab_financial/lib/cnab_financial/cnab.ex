@@ -1,4 +1,5 @@
 defmodule CnabFinancial.CNAB do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
