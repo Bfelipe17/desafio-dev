@@ -5,7 +5,7 @@ defmodule CnabFinancial.Factory do
 
   use ExMachina.Ecto, repo: CnabFinancial.Repo
 
-  alias CnabFinancial.CNAB
+  alias CnabFinancial.{CNAB, User}
 
   def cnab_params_factory do
     %{
@@ -38,6 +38,14 @@ defmodule CnabFinancial.Factory do
       "name" => "Bruno Felipe",
       "email" => "teste@teste.com",
       "password" => "testing"
+    }
+  end
+
+  def user_changeset_factory do
+    %User{
+      name: "Bruno Felipe",
+      email: "teste@teste.com",
+      password_hash: "testing"
     }
   end
 end
