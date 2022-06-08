@@ -10,6 +10,10 @@ import Config
 config :cnab_financial,
   ecto_repos: [CnabFinancial.Repo]
 
+config :cnab_financial, CnabFinancial.Auth.Guardian,
+  issuer: "cnab_financial",
+  secret_key: "35QpjlRfBxEkN0Skr8f2I83FfnZLLlut4ehAkS8Mjng8N+gxXrEdfEVtWqIwlPcD"
+
 # Configures the endpoint
 config :cnab_financial, CnabFinancialWeb.Endpoint,
   url: [host: "localhost"],
@@ -36,10 +40,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-
-config :my_app, MyApp.Guardian,
-  issuer: "cnab_financial",
-  secret_key: "NCtPzlVhQlJHLGX4pgqnE8W3CgtwPqvwcKLXOGkHjGXR6nYFCoILGt39JjsBDEEM"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

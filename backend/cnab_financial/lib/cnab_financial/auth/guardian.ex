@@ -1,5 +1,5 @@
 defmodule CnabFinancial.Auth.Guardian do
-  use Guardian, otp_app: :rockelivery
+  use Guardian, otp_app: :cnab_financial
 
   alias CnabFinancial.{Error, User}
   alias CnabFinancial.User.Get, as: UserGet
@@ -11,8 +11,8 @@ defmodule CnabFinancial.Auth.Guardian do
     {:ok, resource}
   end
 
-  def authenticate(%{"id" => user_id, "password" => password}) do
-    with {:ok, %User{password_hash: hash} = user} <- UserGet.by_id(user_id),
+  def authenticate(%{"email" => email, "password" => password}) do
+    with {:ok, %User{password_hash: hash} = user} <- UserGet.by_email(email),
          true <- Pbkdf2.verify_pass(password, hash),
          {:ok, token, _claims} <- encode_and_sign(user) do
       {:ok, token}
