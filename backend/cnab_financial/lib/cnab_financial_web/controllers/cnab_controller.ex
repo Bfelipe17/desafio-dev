@@ -1,7 +1,15 @@
 defmodule CnabFinancialWeb.CnabController do
   use CnabFinancialWeb, :controller
 
-  alias CnabFinancial.CNAB.Create
+  alias CnabFinancial.CNAB.{Create, Get}
+
+  def index(conn, _params) do
+    cnabs = Get.all()
+
+    conn
+    |> put_status(:ok)
+    |> render("index.json", data: cnabs)
+  end
 
   def create(conn, %{
         "file" => %Plug.Upload{

@@ -8,6 +8,7 @@ defmodule CnabFinancialWeb.Router do
   scope "/api", CnabFinancialWeb do
     pipe_through :api
 
+    get "/cnabs", CnabController, :index
     post "/cnabs", CnabController, :create
   end
 
