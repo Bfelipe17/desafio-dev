@@ -5,8 +5,12 @@ defmodule CnabFinancialWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug CnabFinancial.Auth.Pipeline
+  end
+
   scope "/api", CnabFinancialWeb do
-    pipe_through :api
+    pipe_through [:api, :auth]
 
     get "/cnabs", CnabController, :index
     post "/cnabs", CnabController, :create
