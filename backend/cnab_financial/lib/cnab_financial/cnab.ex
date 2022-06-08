@@ -20,8 +20,8 @@ defmodule CnabFinancial.CNAB do
   end
 
   @doc false
-  def changeset(cnab, attrs) do
-    cnab
+  def changeset(attrs) do
+    %__MODULE__{}
     |> cast(attrs, @required_fields)
     |> validate_required(@required_fields)
   end

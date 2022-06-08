@@ -18,15 +18,17 @@ defmodule CnabFinancial.CNAB.Parser do
   defp format_fields([_, type, date, value, cpf, card, hour, store_owner, store_name]) do
     [_, year, month, day] = Regex.run(@date_regex, date)
 
-    %CNAB{
-      type: type,
-      date: Date.from_iso8601!("#{year}-#{month}-#{day}"),
-      value: String.to_integer(value) / 100.0,
-      cpf: cpf,
-      card: card,
-      hour: hour,
-      store_owner: String.trim(store_owner),
-      store_name: String.trim(store_name)
+    params = %{
+      "type" => type,
+      "date" => Date.from_iso8601!("#{year}-#{month}-#{day}"),
+      "value" => String.to_integer(value) / 100.0,
+      "cpf" => cpf,
+      "card" => card,
+      "hour" => hour,
+      "store_owner" => String.trim(store_owner),
+      "store_name" => String.trim(store_name)
     }
+
+    CNAB.changeset(params)
   end
 end
