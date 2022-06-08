@@ -28,4 +28,12 @@ defmodule CnabFinancial.Factory do
       value: 506.17
     }
   end
+
+  def user_params_factory do
+    %{
+      "name" => "Bruno Felipe",
+      "email" => "teste@teste.com",
+      "password" => "testing"
+    }
+  end
 end
