@@ -16,6 +16,14 @@ defmodule CnabFinancialWeb.Router do
     post "/cnabs", CnabController, :create
   end
 
+  scope "/api", CnabFinancialWeb do
+    pipe_through :api
+
+    post "/users", UserController, :new
+    post "/users/session", UserController, :session
+    get "/users/me", UserController, :me
+  end
+
   # Enables LiveDashboard only for development
   #
   # If you want to use the LiveDashboard in production, you should put
