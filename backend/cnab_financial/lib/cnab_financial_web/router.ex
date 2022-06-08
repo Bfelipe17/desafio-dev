@@ -14,6 +14,7 @@ defmodule CnabFinancialWeb.Router do
 
     get "/cnabs", CnabController, :index
     post "/cnabs", CnabController, :create
+    get "/users/me", UserController, :me
   end
 
   scope "/api", CnabFinancialWeb do
@@ -21,7 +22,6 @@ defmodule CnabFinancialWeb.Router do
 
     post "/users", UserController, :new
     post "/users/session", UserController, :session
-    get "/users/me", UserController, :me
   end
 
   # Enables LiveDashboard only for development

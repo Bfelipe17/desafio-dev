@@ -1,4 +1,7 @@
 defmodule CnabFinancial.Auth.Guardian do
+  @moduledoc """
+    Module that creates a token to an existing user
+  """
   use Guardian, otp_app: :cnab_financial
 
   alias CnabFinancial.{Error, User}

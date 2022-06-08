@@ -1,4 +1,8 @@
 defmodule CnabFinancial.User.Create do
+  @moduledoc """
+    Module that User params and insert into database
+  """
+
   alias CnabFinancial.{Error, Repo, User}
 
   def call(params) do

@@ -1,4 +1,7 @@
 defmodule CnabFinancial.Error do
+  @moduledoc """
+    Module that creates an error
+  """
   @keys [:status, :result]
 
   @enforce_keys @keys

@@ -1,4 +1,8 @@
 defmodule CnabFinancial.Factory do
+  @moduledoc """
+    Module that help us creating test data
+  """
+
   use ExMachina.Ecto, repo: CnabFinancial.Repo
 
   alias CnabFinancial.CNAB
