@@ -1,4 +1,4 @@
-defmodule CnabFinancial.CNAB.Get do
+defmodule CnabFinancial.User.Get do
   alias CnabFinancial.{Error, Repo, User}
 
   def by_id(id) do
