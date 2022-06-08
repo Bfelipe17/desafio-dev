@@ -14,6 +14,10 @@ config :cnab_financial, CnabFinancial.Auth.Guardian,
   issuer: "cnab_financial",
   secret_key: "35QpjlRfBxEkN0Skr8f2I83FfnZLLlut4ehAkS8Mjng8N+gxXrEdfEVtWqIwlPcD"
 
+config :cnab_financial, CnabFinancial.Auth.Pipeline,
+  module: CnabFinancial.Auth.Guardian,
+  error_handler: CnabFinancial.Auth.ErrorHandler
+
 # Configures the endpoint
 config :cnab_financial, CnabFinancialWeb.Endpoint,
   url: [host: "localhost"],
