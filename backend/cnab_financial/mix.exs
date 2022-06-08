@@ -53,7 +53,8 @@ defmodule CnabFinancial.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:excoveralls, "~> 0.10", only: :test},
-      {:ex_machina, "~> 2.7.0", only: :test}
+      {:ex_machina, "~> 2.7.0", only: :test},
+      {:pbkdf2_elixir, "~> 2.0"}
     ]
   end
 
