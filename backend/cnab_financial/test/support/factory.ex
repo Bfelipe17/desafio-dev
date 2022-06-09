@@ -45,7 +45,7 @@ defmodule CnabFinancial.Factory do
     %User{
       name: "Bruno Felipe",
       email: "teste@teste.com",
-      password_hash: "testing"
+      password: "testing"
     }
   end
 end

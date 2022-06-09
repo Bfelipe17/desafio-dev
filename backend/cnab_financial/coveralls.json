@@ -1,0 +1,18 @@
+{
+  "skip_files": [
+    "test/support",
+    "lib/cnab_financial_web/channels/user_socket.ex",
+    "lib/cnab_financial/mailer.ex",
+    "lib/cnab_financial/repo.ex",
+    "lib/cnab_financial_web.ex",
+    "lib/cnab_financial_web/telemetry.ex",
+    "lib/cnab_financial/application.ex",
+    "lib/cnab_financial_web/router.ex",
+    "lib/cnab_financial_web/gettext.ex",
+    "lib/cnab_financial_web/endpoint.ex",
+    "lib/cnab_financial.ex",
+    "lib/cnab_financial_web/views",
+    "lib/cnab_financial/auth/error_handler.ex",
+    "lib/cnab_financial/auth/pipeline.ex"
+  ]
+}
