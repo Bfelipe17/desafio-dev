@@ -2,8 +2,11 @@ defmodule CnabFinancialWeb.UserController do
   use CnabFinancialWeb, :controller
 
   alias CnabFinancial.{Auth.Guardian, User, User.Create}
+  alias CnabFinancialWeb.FallbackController
 
-  def new(conn, params) do
+  action_fallback FallbackController
+
+  def create(conn, params) do
     with {:ok, %User{} = user} <- Create.call(params),
          {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn

@@ -2,6 +2,9 @@ defmodule CnabFinancialWeb.CnabController do
   use CnabFinancialWeb, :controller
 
   alias CnabFinancial.CNAB.{Create, Get}
+  alias CnabFinancialWeb.FallbackController
+
+  action_fallback FallbackController
 
   def index(conn, _params) do
     cnabs = Get.all()
