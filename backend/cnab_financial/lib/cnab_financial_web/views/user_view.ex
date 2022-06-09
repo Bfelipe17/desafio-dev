@@ -12,6 +12,10 @@ defmodule CnabFinancialWeb.UserView do
     }
   end
 
+  def render("token.json", %{token: token}) do
+    %{token: token}
+  end
+
   def render("user.json", %{user: user}) do
     %{
       name: user.name,

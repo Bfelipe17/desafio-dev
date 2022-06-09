@@ -20,7 +20,7 @@ defmodule CnabFinancialWeb.Router do
   scope "/api", CnabFinancialWeb do
     pipe_through :api
 
-    post "/users", UserController, :new
+    post "/users", UserController, :create
     post "/users/session", UserController, :session
   end
 
