@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../components/Table";
@@ -11,6 +11,7 @@ export function Dashboard() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   const [storeName, setStoreName] = useState('ALL');
+  const [file, setFile] = useState<File>();
 
   useEffect(() => {
     const token = cookies.bycoders_test_token;
@@ -44,18 +45,45 @@ export function Dashboard() {
       })
   }, [storeName])
 
-  console.log(storeName)
+  const fileHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    const fileList = e.target.files;
+
+    if (!fileList) return;
+
+    setFile(fileList[0]);
+
+  }
+
+  const handleFileSubmit = () => {
+    console.log(file)
+    if (file) {
+      const formData = new FormData();
+      formData.append("image", file, file.name);
+
+      api.post("/cnabs", formData, {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      })
+    }
+  }
 
   return (
     <div className="dashboard">
-      <select name="store" onChange={e => setStoreName(e.currentTarget.value)}>
-        <option value="ALL" selected={true}>ALL</option>
-        <option value="BAR DO JOÃO">BAR DO JOÃO</option>
-        <option value="MERCEARIA 3 IRMÃO">MERCEARIA 3 IRMÃO</option>
-        <option value="MERCADO DA AVENIDA">MERCADO DA AVENIDA</option>
-        <option value="LOJA DO Ó - MATRIZ">LOJA DO Ó - MATRIZ</option>
-        <option value="LOJA DO Ó - FILIAL">LOJA DO Ó - FILIAL</option>
-      </select>
+      <div className="options">
+        <select name="store" onChange={e => setStoreName(e.currentTarget.value)}>
+          <option value="ALL" selected={true}>ALL</option>
+          <option value="BAR DO JOÃO">BAR DO JOÃO</option>
+          <option value="MERCEARIA 3 IRMÃO">MERCEARIA 3 IRMÃO</option>
+          <option value="MERCADO DA AVENIDA">MERCADO DA AVENIDA</option>
+          <option value="LOJA DO Ó - MATRIZ">LOJA DO Ó - MATRIZ</option>
+          <option value="LOJA DO Ó - FILIAL">LOJA DO Ó - FILIAL</option>
+        </select>
+        <div>
+          <input type="file" onChange={e => fileHandler(e)} />
+          <button type="button" onClick={handleFileSubmit}>Upload file</button>
+        </div>
+      </div>
 
       <Table cnabs={data} />
     </div>

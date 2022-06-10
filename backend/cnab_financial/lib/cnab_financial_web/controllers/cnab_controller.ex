@@ -15,7 +15,7 @@ defmodule CnabFinancialWeb.CnabController do
   end
 
   def create(conn, %{
-        "file" => %Plug.Upload{
+        "image" => %Plug.Upload{
           path: path
         }
       }) do
