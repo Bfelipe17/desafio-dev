@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../components/Table";
@@ -33,6 +33,7 @@ const fakeData = {
 export function Dashboard() {
   const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const token = cookies.bycoders_test_token;
@@ -43,13 +44,24 @@ export function Dashboard() {
           removeCookie('bycoders_test_token')
           navigate("/login")
         })
-    } else {
-      console.log("Manga")
     }
   }, [])
 
-  console.log("Banana")
+
+  useEffect(() => {
+    const token = cookies.bycoders_test_token;
+    api.get("/cnabs", { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(function (response) {
+        setData(response.data.data)
+      }).catch(function (error) {
+        console.log(error)
+      })
+  }, [])
+
+  console.log(data)
+
+
   return (
-    <Table cnabs={fakeData.data} />
+    <Table cnabs={data} />
   )
 }

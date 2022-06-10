@@ -22,8 +22,6 @@ export function Login() {
         }).catch(function (error) {
           removeCookie('bycoders_test_token')
         })
-    } else {
-      console.log("Manga")
     }
   }, [])
 
