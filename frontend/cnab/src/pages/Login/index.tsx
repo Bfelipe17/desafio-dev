@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { api } from "../../services/api";
 import { ToastContainer, toast } from 'react-toastify';
+import { useCookies } from 'react-cookie';
 
 import 'react-toastify/dist/ReactToastify.css';
 
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [cookies, setCookie] = useCookies(['bycoders_test_token']);
 
   const handleLogin = () => {
     // eslint-disable-next-line no-restricted-globals
@@ -15,6 +17,8 @@ export function Login() {
       email,
       password
     }).then(function (response) {
+      const { token } = response.data;
+      setCookie('bycoders_test_token', token, { path: '/' });
       console.log(response);
     }).catch(function (error) {
       toast.error(`${error.response.data.message}`, {
