@@ -55,7 +55,8 @@ defmodule CnabFinancial.MixProject do
       {:excoveralls, "~> 0.10", only: :test},
       {:ex_machina, "~> 2.7.0", only: :test},
       {:pbkdf2_elixir, "~> 2.0"},
-      {:guardian, "~> 2.0"}
+      {:guardian, "~> 2.0"},
+      {:cors_plug, "~> 3.0"}
     ]
   end
 
