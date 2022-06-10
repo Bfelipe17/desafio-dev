@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useCookies } from 'react-cookie';
 
 import 'react-toastify/dist/ReactToastify.css';
+import "./style.css"
 
 export function Login() {
   const [email, setEmail] = useState('');
@@ -19,7 +20,6 @@ export function Login() {
     }).then(function (response) {
       const { token } = response.data;
       setCookie('bycoders_test_token', token, { path: '/' });
-      console.log(response);
     }).catch(function (error) {
       toast.error(`${error.response.data.message}`, {
         position: "top-right",
@@ -36,11 +36,17 @@ export function Login() {
   return (
     <>
       <ToastContainer />
-      <form onSubmit={handleLogin}>
-        <input type="email" onChange={(e) => setEmail(e.target.value)} />
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        <button>Logar</button>
-      </form>
+      <main>
+        <form onSubmit={handleLogin}>
+          <h2>Login to your account</h2>
+          <label htmlFor="email">E-mail</label>
+          <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Ex: joe@user.com" />
+          <label htmlFor="password">Password</label>
+          <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="******" />
+          <button>Login</button>
+          <p><a href="/signup">Create an account</a></p>
+        </form>
+      </main>
     </>
 
   )
