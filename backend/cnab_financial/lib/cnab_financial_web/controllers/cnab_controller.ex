@@ -25,4 +25,12 @@ defmodule CnabFinancialWeb.CnabController do
     |> put_status(201)
     |> text("")
   end
+
+  def get(conn, %{"store_name" => store_name}) do
+    cnabs = Get.by_store_name(store_name)
+
+    conn
+    |> put_status(200)
+    |> render("index.json", data: cnabs)
+  end
 end

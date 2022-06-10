@@ -13,6 +13,7 @@ defmodule CnabFinancialWeb.Router do
     pipe_through [:api, :auth]
 
     get "/cnabs", CnabController, :index
+    get "/cnabs/list", CnabController, :get
     post "/cnabs", CnabController, :create
     get "/users/me", UserController, :me
   end

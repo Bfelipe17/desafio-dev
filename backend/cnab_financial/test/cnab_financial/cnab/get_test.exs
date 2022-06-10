@@ -18,4 +18,17 @@ defmodule CnabFinancial.CNAB.GetTest do
              } = response
     end
   end
+
+  describe "by_store_name/1" do
+    test "should return all registries for the corresponding store name on database" do
+      insert(:cnab_changeset)
+
+      response = Get.by_store_name("MERCADO DA AVENIDA") |> Enum.at(0)
+
+      assert %CNAB{
+               store_name: "MERCADO DA AVENIDA",
+               store_owner: "MARCOS PEREIRA"
+             } = response
+    end
+  end
 end
