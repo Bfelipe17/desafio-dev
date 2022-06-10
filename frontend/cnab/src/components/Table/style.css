@@ -1,7 +1,26 @@
+table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+thead tr {
+  background-color: #009879;
+  color: #ffffff;
+  font-size: 20px;
+}
+
 .tr_green {
-  background-color: green;
+  background-color: #b5e48c;
 }
 
 .tr_red {
-  background-color: red;
+  background-color: #ff9b85;
+}
+
+th {
+  padding: 20px 30px;
 }
