@@ -11,6 +11,10 @@ defmodule CnabFinancial.CNAB.Get do
     Repo.all(CNAB)
   end
 
+  def by_store_name("ALL") do
+    all()
+  end
+
   def by_store_name(store_name) do
     query =
       from c in CNAB,

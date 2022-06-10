@@ -3,37 +3,14 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../components/Table";
 import { api } from "../../services/api";
+import "./style.css"
 
-
-const fakeData = {
-  "data": [
-    {
-      "card": "4753****3153",
-      "cpf": "09620676017",
-      "date": "2019-03-01",
-      "hour": 153453,
-      "store_name": "BAR DO JOÃO",
-      "store_owner": "JOÃO MACEDO",
-      "type": 3,
-      "value": 142.0
-    },
-    {
-      "card": "8473****1231",
-      "cpf": "23270298056",
-      "date": "2019-03-01",
-      "hour": 231233,
-      "store_name": "MERCEARIA 3 IRMÃO",
-      "store_owner": "JOSÉ COSTA",
-      "type": 2,
-      "value": 102.0
-    },
-  ]
-}
 
 export function Dashboard() {
   const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+  const [storeName, setStoreName] = useState('ALL');
 
   useEffect(() => {
     const token = cookies.bycoders_test_token;
@@ -47,9 +24,9 @@ export function Dashboard() {
     }
   }, [])
 
+  const token = cookies.bycoders_test_token;
 
   useEffect(() => {
-    const token = cookies.bycoders_test_token;
     api.get("/cnabs", { headers: { 'Authorization': `Bearer ${token}` } })
       .then(function (response) {
         setData(response.data.data)
@@ -58,10 +35,30 @@ export function Dashboard() {
       })
   }, [])
 
-  console.log(data)
+  useEffect(() => {
+    api.get(`/cnabs/list?store_name=${storeName}`, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(function (response) {
+        setData(response.data.data)
+      }).catch(function (error) {
+        console.log(error)
+      })
+  }, [storeName])
 
+  console.log(storeName)
 
   return (
-    <Table cnabs={data} />
+    <div className="dashboard">
+      <select name="store" onChange={e => setStoreName(e.currentTarget.value)}>
+        <option value="ALL" selected={true}>ALL</option>
+        <option value="BAR DO JOÃO">BAR DO JOÃO</option>
+        <option value="MERCEARIA 3 IRMÃO">MERCEARIA 3 IRMÃO</option>
+        <option value="MERCADO DA AVENIDA">MERCADO DA AVENIDA</option>
+        <option value="LOJA DO Ó - MATRIZ">LOJA DO Ó - MATRIZ</option>
+        <option value="LOJA DO Ó - FILIAL">LOJA DO Ó - FILIAL</option>
+      </select>
+
+      <Table cnabs={data} />
+    </div>
+
   )
 }

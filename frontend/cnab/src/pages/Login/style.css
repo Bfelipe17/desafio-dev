@@ -6,6 +6,8 @@ main {
   justify-content: center;
   background: rgb(47, 56, 73);
   background: linear-gradient(180deg, rgba(47, 56, 73, 1) 50%, rgba(255, 255, 255, 1) 50%);
+  flex-direction: column;
+  overflow-x: auto;
 }
 
 form {
