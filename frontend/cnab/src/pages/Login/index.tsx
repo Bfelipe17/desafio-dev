@@ -10,26 +10,10 @@ import { useNavigate } from "react-router-dom";
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
+  const [cookies, setCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const token = cookies.bycoders_test_token;
-    if (cookies.bycoders_test_token) {
-      api.get("/users/me", { headers: { 'Authorization': `Bearer ${token}` } })
-        .then(function (response) {
-          navigate("/")
-        }).catch(function (error) {
-          removeCookie('bycoders_test_token')
-        })
-    }
-  }, [])
-
-
-
   const handleLogin = () => {
-    // eslint-disable-next-line no-restricted-globals
-    event?.preventDefault();
     api.post('/users/session', {
       email,
       password
@@ -60,7 +44,7 @@ export function Login() {
           <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Ex: joe@user.com" />
           <label htmlFor="password">Password</label>
           <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="******" />
-          <button>Login</button>
+          <button type="button">Login</button>
           <p><a href="/signup">Create an account</a></p>
         </form>
       </main>
