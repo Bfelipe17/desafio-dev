@@ -38,13 +38,13 @@ export function Login() {
     <>
       <ToastContainer />
       <main>
-        <form onSubmit={handleLogin}>
+        <form>
           <h2>Login to your account</h2>
           <label htmlFor="email">E-mail</label>
           <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Ex: joe@user.com" />
           <label htmlFor="password">Password</label>
           <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="******" />
-          <button type="button">Login</button>
+          <button onClick={handleLogin} type="button">Login</button>
           <p><a href="/signup">Create an account</a></p>
         </form>
       </main>

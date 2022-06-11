@@ -49,7 +49,7 @@ export function Signup() {
     <>
       <ToastContainer />
       <main>
-        <form onSubmit={handleLogin}>
+        <form>
           <h2>Create an account</h2>
           <label htmlFor="name">Name</label>
           <input type="name" id="name" onChange={(e) => setName(e.target.value)} placeholder="Ex: Joe user" />
@@ -57,7 +57,7 @@ export function Signup() {
           <input type="email" id="email" onChange={(e) => setEmail(e.target.value)} placeholder="Ex: joe@user.com" />
           <label htmlFor="password">Password</label>
           <input type="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder="******" />
-          <button type="button">Login</button>
+          <button type="button" onClick={handleLogin}>Login</button>
           <p><a href="/login">Login to your account</a></p>
         </form>
       </main>
