@@ -1,3 +1,4 @@
+import { formatCPF, formatDate, formatValue } from "../../utils/format";
 import "./style.css"
 
 interface TableProps {
@@ -19,22 +20,7 @@ interface CnabProps {
 
 export function Table({ cnabs }: TableProps) {
 
-  const formatDate = (date: string) => {
-    return new Intl.DateTimeFormat("pt-BR").format(
-      Date.parse(date)
-    )
-  }
 
-  const formatValue = (value: string) => {
-    return new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    }).format(Number(value))
-  }
-
-  const formatCPF = (cpf: string) => {
-    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
-  }
 
   return (
     <table>
