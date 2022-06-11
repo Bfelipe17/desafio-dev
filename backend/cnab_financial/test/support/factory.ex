@@ -48,7 +48,8 @@ defmodule CnabFinancial.Factory do
     %User{
       name: "Bruno Felipe",
       email: "teste@teste.com",
-      password: "testing"
+      password: "testing",
+      id: "f0834884-3158-41c8-9006-d5a137037d44"
     }
   end
 end

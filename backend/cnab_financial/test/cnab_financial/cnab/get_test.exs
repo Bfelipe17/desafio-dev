@@ -5,25 +5,14 @@ defmodule CnabFinancial.CNAB.GetTest do
 
   alias CnabFinancial.CNAB
   alias CnabFinancial.CNAB.Get
+  alias CnabFinancial.User
 
-  describe "all/0" do
-    test "should return all registries on database" do
-      insert(:cnab_changeset)
-
-      response = Get.all() |> Enum.at(0)
-
-      assert %CNAB{
-               store_name: "MERCADO DA AVENIDA",
-               store_owner: "MARCOS PEREIRA"
-             } = response
-    end
-  end
-
-  describe "by_store_name/1" do
+  describe "by_store_name/2" do
     test "should return all registries for the corresponding store name on database" do
-      insert(:cnab_changeset)
+      %User{id: id} = insert(:user_changeset)
+      insert(:cnab_changeset, %{user_id: id})
 
-      response = Get.by_store_name("MERCADO DA AVENIDA") |> Enum.at(0)
+      response = Get.by_store_name("MERCADO DA AVENIDA", id) |> Enum.at(0)
 
       assert %CNAB{
                store_name: "MERCADO DA AVENIDA",

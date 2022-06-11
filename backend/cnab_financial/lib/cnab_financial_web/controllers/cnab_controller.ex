@@ -30,8 +30,6 @@ defmodule CnabFinancialWeb.CnabController do
       |> String.split(" ")
 
     with {:ok, {:ok, %User{id: id}}, _} <- Guardian.resource_from_token(token) do
-      IO.inspect(params)
-
       Create.call(path, id)
 
       conn
@@ -41,10 +39,17 @@ defmodule CnabFinancialWeb.CnabController do
   end
 
   def get(conn, %{"store_name" => store_name}) do
-    cnabs = Get.by_store_name(store_name)
+    [_, token] =
+      get_req_header(conn, "authorization")
+      |> Enum.at(0)
+      |> String.split(" ")
 
-    conn
-    |> put_status(200)
-    |> render("index.json", data: cnabs)
+    with {:ok, {:ok, %User{id: id}}, _} <- Guardian.resource_from_token(token) do
+      cnabs = Get.by_store_name(store_name, id)
+
+      conn
+      |> put_status(200)
+      |> render("index.json", data: cnabs)
+    end
   end
 end

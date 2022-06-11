@@ -1,9 +1,7 @@
 defmodule CnabFinancial.CNAB.Parser do
   @moduledoc """
-    Module that reads an file with CNABs and converts all to a valid CNAB Changeset
+    Module that reads an file with CNABs and converts all fields
   """
-
-  alias CnabFinancial.CNAB
   alias Decimal, as: D
 
   @regex ~r/([\d]{1})([\d]{8})([\d]{10})([\d]{11})([\S]{12})([\d]{6})([\S\s]{14})([\S\s]{19})/

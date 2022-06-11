@@ -7,18 +7,18 @@ defmodule CnabFinancial.CNAB.Get do
 
   alias CnabFinancial.{CNAB, Repo}
 
-  def all() do
-    Repo.all(CNAB)
-  end
-
-  def by_store_name("ALL") do
-    all()
-  end
-
-  def by_store_name(store_name) do
+  def by_store_name("ALL", user_id) do
     query =
       from c in CNAB,
-        where: c.store_name == ^store_name
+        where: c.user_id == ^user_id
+
+    Repo.all(query)
+  end
+
+  def by_store_name(store_name, user_id) do
+    query =
+      from c in CNAB,
+        where: c.store_name == ^store_name and c.user_id == ^user_id
 
     Repo.all(query)
   end
