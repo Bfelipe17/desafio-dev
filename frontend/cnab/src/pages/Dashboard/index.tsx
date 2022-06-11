@@ -12,6 +12,8 @@ export function Dashboard() {
   const [data, setData] = useState([]);
   const [storeName, setStoreName] = useState('ALL');
   const [file, setFile] = useState<File>();
+  const [total, setTotal] = useState(0);
+  const token = cookies.bycoders_test_token;
 
   useEffect(() => {
     const token = cookies.bycoders_test_token;
@@ -23,18 +25,19 @@ export function Dashboard() {
           navigate("/login")
         })
     }
-  }, [])
 
-  const token = cookies.bycoders_test_token;
-
-  useEffect(() => {
     api.get("/cnabs", { headers: { 'Authorization': `Bearer ${token}` } })
       .then(function (response) {
         setData(response.data.data)
+
+        //data.reduce(function(previousValue, currentValue))
       }).catch(function (error) {
         console.log(error)
       })
+
+
   }, [])
+
 
   useEffect(() => {
     api.get(`/cnabs/list?store_name=${storeName}`, { headers: { 'Authorization': `Bearer ${token}` } })
@@ -58,7 +61,7 @@ export function Dashboard() {
     console.log(file)
     if (file) {
       const formData = new FormData();
-      formData.append("image", file, file.name);
+      formData.append("file", file, file.name);
 
       api.post("/cnabs", formData, {
         headers: {
@@ -84,7 +87,7 @@ export function Dashboard() {
           <button type="button" onClick={handleFileSubmit}>Upload file</button>
         </div>
       </div>
-
+      <p>Total: {total}</p>
       <Table cnabs={data} />
     </div>
 

@@ -5,6 +5,7 @@ interface TableProps {
 }
 
 interface CnabProps {
+  id: string;
   card: string;
   cpf: string;
   date: string;
@@ -13,13 +14,10 @@ interface CnabProps {
   store_owner: string;
   type: number;
   value: number;
+  kind: string;
 }
 
 export function Table({ cnabs }: TableProps) {
-
-  const isOutflow = (type: number) => {
-    return type === 2 || type === 3 || type === 9;
-  }
 
   return (
     <table>
@@ -38,9 +36,8 @@ export function Table({ cnabs }: TableProps) {
       </thead>
       <tbody>
         {cnabs.map((cnab: any) => {
-          const kind = isOutflow(cnab.type)
           return (
-            <tr className={kind ? 'tr_red' : 'tr_green'}>
+            <tr className={cnab.value < 0 ? 'tr_red' : 'tr_green'} id={cnab.id}>
               <th>{cnab.type}</th>
               <th>{cnab.date}</th>
               <th>{cnab.value}</th>
@@ -49,7 +46,7 @@ export function Table({ cnabs }: TableProps) {
               <th>{cnab.hour}</th>
               <th>{cnab.store_owner}</th>
               <th>{cnab.store_name}</th>
-              <th>{kind ? "Outflow" : "Inflow"}</th>
+              <th>{cnab.kind}</th>
             </tr>
           )
         })}
