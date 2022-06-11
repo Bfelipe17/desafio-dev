@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { Table } from "../../components/Table";
 import { api } from "../../services/api";
+import { formatValue } from "../../utils/format";
 import "./style.css"
 
 
@@ -29,7 +30,6 @@ export function Dashboard() {
     api.get("/cnabs", { headers: { 'Authorization': `Bearer ${token}` } })
       .then(function (response) {
         setData(response.data.data)
-        //data.reduce(function(previousValue, currentValue))
       }).catch(function (error) {
         console.log(error)
       })
@@ -37,13 +37,15 @@ export function Dashboard() {
 
 
   useEffect(() => {
-    api.get(`/cnabs/list?store_name=${storeName}`, { headers: { 'Authorization': `Bearer ${token}` } })
-      .then(function (response) {
-        setData(response.data.data)
-      }).catch(function (error) {
-        console.log(error)
-      })
+    getCnabsBy(storeName)
   }, [storeName])
+
+  useEffect(() => {
+    setTotal(data.reduce((accumulator: any, currentValue: any) => {
+      console.log({ accumulator, currentValue: Number(currentValue.value) })
+      return accumulator + Number(currentValue.value)
+    }, 0))
+  }, [data])
 
   const fileHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const fileList = e.target.files;
@@ -51,11 +53,9 @@ export function Dashboard() {
     if (!fileList) return;
 
     setFile(fileList[0]);
-
   }
 
   const handleFileSubmit = () => {
-    console.log(file)
     if (file) {
       const formData = new FormData();
       formData.append("file", file, file.name);
@@ -64,8 +64,19 @@ export function Dashboard() {
         headers: {
           "Authorization": `Bearer ${token}`,
         },
+      }).then(function (response) {
+        getCnabsBy(storeName)
       })
     }
+  }
+
+  const getCnabsBy = (storeName: string) => {
+    api.get(`/cnabs/list?store_name=${storeName}`, { headers: { 'Authorization': `Bearer ${token}` } })
+      .then(function (response) {
+        setData(response.data.data)
+      }).catch(function (error) {
+        console.log(error)
+      })
   }
 
   return (
@@ -84,9 +95,8 @@ export function Dashboard() {
           <button type="button" onClick={handleFileSubmit}>Upload file</button>
         </div>
       </div>
-      <p>Total: {total}</p>
+      <p>Total: {formatValue(total.toString())}</p>
       <Table cnabs={data} />
     </div>
-
   )
 }
