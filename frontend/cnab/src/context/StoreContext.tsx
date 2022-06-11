@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useState } from "react";
+import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { api } from "../services/api";
 
@@ -11,6 +11,7 @@ type StoreContextData = {
   setStoreName: Dispatch<SetStateAction<string>>;
   getCnabsBy(storeName: string): void;
   data: any[];
+  total: number;
 };
 
 export const StoreContext = createContext({} as StoreContextData)
@@ -19,7 +20,15 @@ export function StoreProvider({ children }: StoreProviderProps) {
   const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
   const [storeName, setStoreName] = useState("ALL");
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
   const token = cookies.bycoders_test_token;
+
+  useEffect(() => {
+    setTotal(data.reduce((accumulator: any, currentValue: any) => {
+      console.log({ accumulator, currentValue: Number(currentValue.value) })
+      return accumulator + Number(currentValue.value)
+    }, 0))
+  }, [data])
 
   const getCnabsBy = (storeName: string) => {
     api.get(`/cnabs/list?store_name=${storeName}`, { headers: { 'Authorization': `Bearer ${token}` } })
@@ -31,7 +40,7 @@ export function StoreProvider({ children }: StoreProviderProps) {
   }
 
   return (
-    <StoreContext.Provider value={{ storeName, setStoreName, getCnabsBy, data }}>
+    <StoreContext.Provider value={{ storeName, setStoreName, getCnabsBy, data, total }}>
       {children}
     </StoreContext.Provider>
   )
