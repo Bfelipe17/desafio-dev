@@ -1,0 +1,11 @@
+.total_text {
+  font-size: 30px;
+}
+
+.total_text .negative {
+  color: red;
+}
+
+.total_text .positive {
+  color: green
+}
