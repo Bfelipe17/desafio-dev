@@ -1,7 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { Select } from "../../components/Select";
 import { Table } from "../../components/Table";
+import { StoreContext } from "../../context/StoreContext";
 import { api } from "../../services/api";
 import { formatValue } from "../../utils/format";
 import "./style.css"
@@ -11,10 +13,10 @@ export function Dashboard() {
   const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-  const [storeName, setStoreName] = useState('ALL');
   const [file, setFile] = useState<File>();
   const [total, setTotal] = useState(0);
   const token = cookies.bycoders_test_token;
+  const { storeName } = useContext(StoreContext);
 
   useEffect(() => {
     const token = cookies.bycoders_test_token;
@@ -82,14 +84,15 @@ export function Dashboard() {
   return (
     <div className="dashboard">
       <div className="options">
-        <select name="store" onChange={e => setStoreName(e.currentTarget.value)}>
+        <Select />
+        {/* <select name="store">
           <option value="ALL" selected={true}>ALL</option>
           <option value="BAR DO JOÃO">BAR DO JOÃO</option>
           <option value="MERCEARIA 3 IRMÃO">MERCEARIA 3 IRMÃO</option>
           <option value="MERCADO DA AVENIDA">MERCADO DA AVENIDA</option>
           <option value="LOJA DO Ó - MATRIZ">LOJA DO Ó - MATRIZ</option>
           <option value="LOJA DO Ó - FILIAL">LOJA DO Ó - FILIAL</option>
-        </select>
+        </select> */}
         <div>
           <input type="file" onChange={e => fileHandler(e)} />
           <button type="button" onClick={handleFileSubmit}>Upload file</button>
