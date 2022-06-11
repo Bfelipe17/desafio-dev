@@ -29,13 +29,10 @@ export function Dashboard() {
     api.get("/cnabs", { headers: { 'Authorization': `Bearer ${token}` } })
       .then(function (response) {
         setData(response.data.data)
-
         //data.reduce(function(previousValue, currentValue))
       }).catch(function (error) {
         console.log(error)
       })
-
-
   }, [])
 
 

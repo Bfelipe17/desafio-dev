@@ -19,6 +19,23 @@ interface CnabProps {
 
 export function Table({ cnabs }: TableProps) {
 
+  const formatDate = (date: string) => {
+    return new Intl.DateTimeFormat("pt-BR").format(
+      Date.parse(date)
+    )
+  }
+
+  const formatValue = (value: string) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(Number(value))
+  }
+
+  const formatCPF = (cpf: string) => {
+    return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+  }
+
   return (
     <table>
       <thead>
@@ -39,9 +56,9 @@ export function Table({ cnabs }: TableProps) {
           return (
             <tr className={cnab.value < 0 ? 'tr_red' : 'tr_green'} id={cnab.id}>
               <th>{cnab.type}</th>
-              <th>{cnab.date}</th>
-              <th>{cnab.value}</th>
-              <th>{cnab.cpf}</th>
+              <th>{formatDate(cnab.date)}</th>
+              <th>{formatValue(cnab.value)}</th>
+              <th>{formatCPF(cnab.cpf)}</th>
               <th>{cnab.card}</th>
               <th>{cnab.hour}</th>
               <th>{cnab.store_owner}</th>
