@@ -9,6 +9,7 @@ defmodule CnabFinancialWeb.CnabView do
 
   def render("cnab.json", %{cnab: cnab}) do
     %{
+      id: cnab.id,
       type: cnab.type,
       date: cnab.date,
       value: cnab.value,
@@ -16,7 +17,8 @@ defmodule CnabFinancialWeb.CnabView do
       card: cnab.card,
       hour: cnab.hour,
       store_owner: cnab.store_owner,
-      store_name: cnab.store_name
+      store_name: cnab.store_name,
+      kind: cnab.kind
     }
   end
 end

@@ -3,7 +3,7 @@ defmodule CnabFinancial.CNAB do
   use Ecto.Schema
   import Ecto.Changeset
 
-  @required_fields [:type, :date, :value, :cpf, :card, :hour, :store_owner, :store_name]
+  @required_fields [:type, :date, :value, :cpf, :card, :hour, :store_owner, :store_name, :kind]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -11,11 +11,12 @@ defmodule CnabFinancial.CNAB do
     field :card, :string
     field :cpf, :string
     field :date, :date
-    field :hour, :integer
+    field :hour, :string
     field :store_name, :string
     field :store_owner, :string
     field :type, :integer
-    field :value, :float
+    field :value, :decimal
+    field :kind, :string
 
     timestamps()
   end
