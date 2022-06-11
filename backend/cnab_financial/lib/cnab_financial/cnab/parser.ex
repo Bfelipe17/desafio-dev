@@ -18,11 +18,11 @@ defmodule CnabFinancial.CNAB.Parser do
 
   defp parse_line(line) do
     Regex.run(@regex, line)
-    |> generate_changeset()
+    |> generate_params()
   end
 
-  defp generate_changeset([_, type, date, value, cpf, card, hour, store_owner, store_name]) do
-    params = %{
+  defp generate_params([_, type, date, value, cpf, card, hour, store_owner, store_name]) do
+    %{
       "type" => type,
       "date" => generate_date(date),
       "value" => format_value(type, value),
@@ -33,8 +33,6 @@ defmodule CnabFinancial.CNAB.Parser do
       "store_name" => String.trim(store_name),
       "kind" => check_kind(type)
     }
-
-    CNAB.changeset(params)
   end
 
   defp generate_date(date) do

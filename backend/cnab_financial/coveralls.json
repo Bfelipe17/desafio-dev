@@ -12,6 +12,7 @@
     "lib/cnab_financial_web/endpoint.ex",
     "lib/cnab_financial.ex",
     "lib/cnab_financial/auth/error_handler.ex",
-    "lib/cnab_financial/auth/pipeline.ex"
+    "lib/cnab_financial/auth/pipeline.ex",
+    "lib/cnab_financial_web/views/"
   ]
 }

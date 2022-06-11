@@ -3,6 +3,7 @@ defmodule CnabFinancial.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Ecto.Changeset
+  alias CnabFinancial.CNAB
 
   @required_fields [:name, :email, :password]
 
@@ -13,6 +14,8 @@ defmodule CnabFinancial.User do
     field :name, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+
+    has_many :cnabs, CNAB
 
     timestamps()
   end

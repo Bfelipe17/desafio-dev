@@ -16,7 +16,9 @@ defmodule CnabFinancial.Factory do
       "store_name" => "MERCADO DA AVENIDA",
       "store_owner" => "MARCOS PEREIRA",
       "type" => "3",
-      "value" => "0000019200"
+      "value" => "0000019200",
+      "kind" => "Financiamento",
+      "user_id" => "123"
     }
   end
 
@@ -25,11 +27,12 @@ defmodule CnabFinancial.Factory do
       card: "1234****2231",
       cpf: "84515254073",
       date: ~D[2019-06-01],
-      hour: 100_000,
+      hour: "10:00:00",
       store_name: "MERCADO DA AVENIDA",
       store_owner: "MARCOS PEREIRA",
       type: 4,
-      value: 506.17
+      value: 506.17,
+      kind: "Crédito"
     }
   end
 

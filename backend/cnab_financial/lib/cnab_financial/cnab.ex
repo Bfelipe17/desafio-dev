@@ -2,8 +2,20 @@ defmodule CnabFinancial.CNAB do
   @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
+  alias CnabFinancial.User
 
-  @required_fields [:type, :date, :value, :cpf, :card, :hour, :store_owner, :store_name, :kind]
+  @required_fields [
+    :type,
+    :date,
+    :value,
+    :cpf,
+    :card,
+    :hour,
+    :store_owner,
+    :store_name,
+    :kind,
+    :user_id
+  ]
 
   @primary_key {:id, :binary_id, autogenerate: true}
   @foreign_key_type :binary_id
@@ -17,6 +29,8 @@ defmodule CnabFinancial.CNAB do
     field :type, :integer
     field :value, :decimal
     field :kind, :string
+
+    belongs_to :user, User
 
     timestamps()
   end
