@@ -11,8 +11,14 @@ export function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [cookies, setCookie, removeCookie] = useCookies(['bycoders_test_token']);
+  const [cookies, setCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (cookies.bycoders_test_token) {
+      navigate("/")
+    }
+  }, [])
 
   const handleLogin = () => {
     api.post('/users', {

@@ -1,4 +1,6 @@
 import { useContext, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router";
 import { FileUpload } from "../../components/File";
 import { Select } from "../../components/Select";
 import { Table } from "../../components/Table";
@@ -8,6 +10,14 @@ import "./style.css"
 
 export function Dashboard() {
   const { storeName, getCnabsBy, data, total } = useContext(StoreContext);
+  const [cookies, setCookie] = useCookies(['bycoders_test_token']);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cookies.bycoders_test_token) {
+      navigate("/login")
+    }
+  }, [])
 
   useEffect(() => {
     getCnabsBy(storeName);

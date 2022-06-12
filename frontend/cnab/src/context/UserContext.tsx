@@ -17,7 +17,7 @@ export function UserProvider({ children }: UserProviderProps) {
   useEffect(() => {
     if (cookies.bycoders_test_token) {
       api.get("/users/me", { headers: { "Authorization": `Bearer ${token}` } })
-        .catch(function (error) {
+        .catch(function () {
           removeCookie("bycoders_test_token");
           navigate("/login");
         })

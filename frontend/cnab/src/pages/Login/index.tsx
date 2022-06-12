@@ -13,6 +13,12 @@ export function Login() {
   const [cookies, setCookie] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (cookies.bycoders_test_token) {
+      navigate("/")
+    }
+  }, [])
+
   const handleLogin = () => {
     api.post('/users/session', {
       email,

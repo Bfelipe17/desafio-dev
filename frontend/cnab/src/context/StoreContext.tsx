@@ -28,7 +28,6 @@ export function StoreProvider({ children }: StoreProviderProps) {
 
   useEffect(() => {
     setTotal(data.reduce((accumulator: any, currentValue: any) => {
-      console.log({ accumulator, currentValue: Number(currentValue.value) })
       return accumulator + Number(currentValue.value)
     }, 0))
   }, [data])
