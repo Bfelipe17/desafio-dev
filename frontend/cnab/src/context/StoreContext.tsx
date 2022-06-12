@@ -19,7 +19,7 @@ type StoreContextData = {
 export const StoreContext = createContext({} as StoreContextData)
 
 export function StoreProvider({ children }: StoreProviderProps) {
-  const [cookies, setCookie, removeCookie] = useCookies(["bycoders_test_token"]);
+  const [cookies] = useCookies(["bycoders_test_token"]);
   const [storeName, setStoreName] = useState("ALL");
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);

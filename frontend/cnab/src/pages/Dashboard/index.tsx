@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
@@ -10,7 +11,7 @@ import "./style.css"
 
 export function Dashboard() {
   const { storeName, getCnabsBy, data, total } = useContext(StoreContext);
-  const [cookies, setCookie] = useCookies(['bycoders_test_token']);
+  const [cookies] = useCookies(['bycoders_test_token']);
   const navigate = useNavigate();
 
   useEffect(() => {

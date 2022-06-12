@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import { createContext, ReactNode, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
@@ -10,6 +10,7 @@ interface UserProviderProps {
 export const UserContext = createContext({});
 
 export function UserProvider({ children }: UserProviderProps) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [cookies, setCookie, removeCookie] = useCookies(["bycoders_test_token"]);
   const token = cookies.bycoders_test_token;
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ export function UserProvider({ children }: UserProviderProps) {
           navigate("/login");
         })
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

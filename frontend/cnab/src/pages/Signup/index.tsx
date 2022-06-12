@@ -18,6 +18,7 @@ export function Signup() {
     if (cookies.bycoders_test_token) {
       navigate("/")
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleLogin = () => {
