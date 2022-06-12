@@ -40,7 +40,7 @@ export function Table({ cnabs }: TableProps) {
       <tbody>
         {cnabs.map((cnab: any) => {
           return (
-            <tr className={cnab.value < 0 ? 'tr_red' : 'tr_green'} id={cnab.id}>
+            <tr className={cnab.value < 0 ? 'tr_red' : 'tr_green'} key={cnab.id}>
               <th>{cnab.type}</th>
               <th>{formatDate(cnab.date)}</th>
               <th>{formatValue(cnab.value)}</th>
