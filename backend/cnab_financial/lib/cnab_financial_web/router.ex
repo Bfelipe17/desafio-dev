@@ -1,18 +1,20 @@
 defmodule CnabFinancialWeb.Router do
   use CnabFinancialWeb, :router
 
+  alias CnabFinancialWeb.Middleware.ValidUser
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   pipeline :auth do
     plug CnabFinancial.Auth.Pipeline
+    plug ValidUser
   end
 
   scope "/api", CnabFinancialWeb do
     pipe_through [:api, :auth]
 
-    get "/cnabs", CnabController, :index
     get "/cnabs/list", CnabController, :get
     post "/cnabs", CnabController, :create
     get "/users/me", UserController, :me
