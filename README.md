@@ -3,6 +3,18 @@
 
 CNAB Financial é uma aplicação do desafio fullstack da bycoders. Nessa aplicação nos é dado um arquivo com alguns CNABs e devemos interpretar e salvar esses dados e depois mostrar no frontend.
 
+## Construído com
+
+### Backend
+
+  * `elixir`
+  * `phoenix`
+  * `postgresql`
+
+### Frontend
+
+  * `react`
+
 ## Funcionalidades
 
 - Autenticação via JWT
@@ -31,3 +43,10 @@ e os seguintes endpoints estarão disponíveis:
 * `http://0.0.0.0:3000` para o frontend
 * `http://0.0.0.0:8080` para o backend
 * `0.0.0.0:5432` para o database
+
+
+## Testando a api
+
+para testar a api, execute os seguintes comandos:
+
+* no terminal, rode o seguinte comando: `docker compose run --rm cnab_backend mix test`

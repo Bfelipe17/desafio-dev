@@ -1,6 +1,6 @@
 # imagem base
 # Alpine é uma imagem mínima do Docker baseada no Alpine Linux com um índice de pacotes completo e apenas 5 MB de tamanho!
-FROM elixir:1.13.3-alpine
+FROM elixir:1.13.4-alpine
 
 # colocando todos os arquivos do projeto na pasta app,
 # para não misturar com os arquivos do contêiner
