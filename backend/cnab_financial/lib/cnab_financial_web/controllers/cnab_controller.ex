@@ -8,26 +8,15 @@ defmodule CnabFinancialWeb.CnabController do
 
   action_fallback FallbackController
 
-  def index(conn, _params) do
-    cnabs = Get.all()
-
-    conn
-    |> put_status(:ok)
-    |> render("index.json", data: cnabs)
-  end
-
   def create(
         conn,
         %{
           "file" => %Plug.Upload{
             path: path
           }
-        } = params
+        }
       ) do
-    [_, token] =
-      get_req_header(conn, "authorization")
-      |> Enum.at(0)
-      |> String.split(" ")
+    token = get_token(conn)
 
     with {:ok, {:ok, %User{id: id}}, _} <- Guardian.resource_from_token(token) do
       Create.call(path, id)
@@ -39,10 +28,7 @@ defmodule CnabFinancialWeb.CnabController do
   end
 
   def get(conn, %{"store_name" => store_name}) do
-    [_, token] =
-      get_req_header(conn, "authorization")
-      |> Enum.at(0)
-      |> String.split(" ")
+    token = get_token(conn)
 
     with {:ok, {:ok, %User{id: id}}, _} <- Guardian.resource_from_token(token) do
       cnabs = Get.by_store_name(store_name, id)
@@ -51,5 +37,12 @@ defmodule CnabFinancialWeb.CnabController do
       |> put_status(200)
       |> render("index.json", data: cnabs)
     end
+  end
+
+  defp get_token(conn) do
+    get_req_header(conn, "authorization")
+    |> Enum.at(0)
+    |> String.split(" ")
+    |> Enum.at(1)
   end
 end
