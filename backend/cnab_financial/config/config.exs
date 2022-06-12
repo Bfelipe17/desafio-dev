@@ -20,7 +20,7 @@ config :cnab_financial, CnabFinancial.Auth.Pipeline,
 
 # Configures the endpoint
 config :cnab_financial, CnabFinancialWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [ip: {0, 0, 0, 0}, port: 4000],
   render_errors: [view: CnabFinancialWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: CnabFinancial.PubSub,
   live_view: [signing_salt: "EQi2QUzv"]

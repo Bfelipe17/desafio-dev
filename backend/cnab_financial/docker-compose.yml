@@ -1,0 +1,24 @@
+version: "3" # versão do docker-compose
+services:
+  # serviços que precisamos colocar em conteiner
+  # e um desses serviços é a nossa aplicação.
+  app:
+    # nome da nossa aplicação, pode ser qualquer nome, nesse caso vamos dar o nome de app
+    build:
+      context: . # context é o diretório onde a gente está
+    command: /bin/sh start.sh # executa o script do arquivo docker_dev_start.sh
+    ports:
+      # pra executar o docker run precisamos passar a porta
+      - "8080:4000" # o `-` no yml significa que é um array
+    depends_on:
+      - db # nosso app depende do db para funcionar
+    links:
+      - db
+  # configuração do banco de dados
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    ports:
+      - "5432:5432"
