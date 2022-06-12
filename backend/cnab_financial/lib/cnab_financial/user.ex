@@ -27,6 +27,7 @@ defmodule CnabFinancial.User do
     |> validate_required(@required_fields)
     |> validate_length(:password, min: 6)
     |> validate_format(:email, ~r/\w+@\w+.\w+/)
+    |> unique_constraint(:email)
     |> put_password_hash()
   end
 
