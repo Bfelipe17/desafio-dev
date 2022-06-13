@@ -35,7 +35,7 @@ Para rodas o projeto, siga estas etapas:
 
 ```zsh
 git clone git@github.com:Bfelipe17/desafio-dev.git
-docker compose up
+docker compose up --build
 ```
 
 e os seguintes endpoints estarão disponíveis:
