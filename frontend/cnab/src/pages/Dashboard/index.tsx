@@ -2,7 +2,6 @@
 import { useContext, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router";
-import { FileUpload } from "../../components/File";
 import { Header } from "../../components/Header";
 import { Select } from "../../components/Select";
 import { Table } from "../../components/Table";
