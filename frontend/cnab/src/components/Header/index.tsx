@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Modal from 'react-modal';
 import { ModalContext } from '../../context/ModalContext';
 import { FileUpload } from '../File';
+import { Logout } from '../Logout';
 import "./style.css";
 
 const customStyles = {
@@ -20,12 +21,14 @@ Modal.setAppElement('#root');
 export function Header() {
   const { openModal, closeModal, modalIsOpen } = useContext(ModalContext);
 
-
   return <header>
     <div className="container">
       <div className="header_items">
         <h2>Bycoders_</h2>
-        <button onClick={openModal}>File uploader</button>
+        <div>
+          <button onClick={openModal}>File uploader</button>
+          <Logout />
+        </div>
       </div>
       <Modal
         isOpen={modalIsOpen}

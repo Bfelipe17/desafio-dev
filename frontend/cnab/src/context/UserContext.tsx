@@ -1,13 +1,18 @@
 import { createContext, ReactNode, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { Logout } from "../components/Logout";
 import { api } from "../services/api";
 
 interface UserProviderProps {
   children: ReactNode;
 }
 
-export const UserContext = createContext({});
+interface UserContextData {
+  logout(): void;
+}
+
+export const UserContext = createContext({} as UserContextData);
 
 export function UserProvider({ children }: UserProviderProps) {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,8 +31,13 @@ export function UserProvider({ children }: UserProviderProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const logout = () => {
+    removeCookie("bycoders_test_token");
+    navigate("/login");
+  }
+
   return (
-    <UserContext.Provider value={{}} >
+    <UserContext.Provider value={{ logout }} >
       {children}
     </UserContext.Provider>
   )

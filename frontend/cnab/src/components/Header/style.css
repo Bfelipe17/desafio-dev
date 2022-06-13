@@ -4,6 +4,7 @@ header {
   margin: 0;
   margin-bottom: 16px;
   padding: 10px 0;
+  color: white;
 }
 
 .container {
@@ -17,10 +18,12 @@ header {
   justify-content: space-between;
 }
 
-.header_items h2 {
-  color: white;
-}
 
 .header_items button {
   width: auto;
+  margin-right: 20px;
+}
+
+header span {
+  cursor: pointer;
 }
