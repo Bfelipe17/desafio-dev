@@ -1,0 +1,21 @@
+.input {
+  margin: 24px 0;
+}
+
+.input_file {
+  display: none;
+}
+
+.input_file+label {
+  background-color: rgb(47, 56, 73);
+  padding: 8px;
+  color: white;
+  border: 2px solid rgb(47, 56, 73);
+  border-radius: 9px;
+  margin-right: 10px;
+}
+
+.input_file+label:hover {
+  background-color: rgb(32, 39, 51);
+  cursor: pointer;
+}

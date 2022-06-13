@@ -14,6 +14,7 @@ type StoreContextData = {
   total: number;
   fileHandler(e: ChangeEvent<HTMLInputElement>): void;
   handleFileSubmit(): void;
+  fileName: string;
 };
 
 export const StoreContext = createContext({} as StoreContextData)
@@ -24,6 +25,7 @@ export function StoreProvider({ children }: StoreProviderProps) {
   const [data, setData] = useState([]);
   const [total, setTotal] = useState(0);
   const [file, setFile] = useState<File>();
+  const [fileName, setFileName] = useState("No file selected");
   const token = cookies.bycoders_test_token;
 
   useEffect(() => {
@@ -45,7 +47,7 @@ export function StoreProvider({ children }: StoreProviderProps) {
     const fileList = e.target.files;
 
     if (!fileList) return;
-
+    setFileName(fileList[0].name)
     setFile(fileList[0]);
   }
 
@@ -65,7 +67,7 @@ export function StoreProvider({ children }: StoreProviderProps) {
   }
 
   return (
-    <StoreContext.Provider value={{ storeName, setStoreName, getCnabsBy, data, total, fileHandler, handleFileSubmit }}>
+    <StoreContext.Provider value={{ storeName, setStoreName, getCnabsBy, data, total, fileHandler, handleFileSubmit, fileName }}>
       {children}
     </StoreContext.Provider>
   )
