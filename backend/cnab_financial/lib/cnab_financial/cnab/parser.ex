@@ -29,7 +29,7 @@ defmodule CnabFinancial.CNAB.Parser do
       "hour" => generate_hour(hour),
       "store_owner" => String.trim(store_owner),
       "store_name" => String.trim(store_name),
-      "kind" => check_kind(type)
+      "kind" => kind(type)
     }
   end
 
@@ -59,18 +59,15 @@ defmodule CnabFinancial.CNAB.Parser do
   defp inflow(value) do
     D.div(D.new(value), 100)
   end
-
-  defp check_kind(type) do
-    case type do
-      "1" -> "Débito"
-      "2" -> "Boleto"
-      "3" -> "Financiamento"
-      "4" -> "Crédito"
-      "5" -> "Recebimento Empréstimo"
-      "6" -> "Vendas"
-      "7" -> "Recebimento TED"
-      "8" -> "Recebimento DOC"
-      "9" -> "Aluguel"
-    end
   end
+
+  defp kind("1"), do: "Débito"
+  defp kind("2"), do: "Boleto"
+  defp kind("3"), do: "Financiamento"
+  defp kind("4"), do: "Crédito"
+  defp kind("5"), do: "Recebimento Empréstimo"
+  defp kind("6"), do: "Vendas"
+  defp kind("7"), do: "Recebimento TED"
+  defp kind("8"), do: "Recebimento DOC"
+  defp kind("9"), do: "Aluguel"
 end
