@@ -59,7 +59,6 @@ defmodule CnabFinancial.CNAB.Parser do
   defp inflow(value) do
     D.div(D.new(value), 100)
   end
-  end
 
   defp kind("1"), do: "Débito"
   defp kind("2"), do: "Boleto"
