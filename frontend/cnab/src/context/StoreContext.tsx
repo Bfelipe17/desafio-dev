@@ -1,6 +1,7 @@
-import { ChangeEvent, createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState } from "react";
+import { ChangeEvent, createContext, Dispatch, ReactNode, SetStateAction, useContext, useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import { api } from "../services/api";
+import { ModalContext } from "./ModalContext";
 
 interface StoreProviderProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ type StoreContextData = {
 export const StoreContext = createContext({} as StoreContextData)
 
 export function StoreProvider({ children }: StoreProviderProps) {
+  const { closeModal } = useContext(ModalContext);
   const [cookies] = useCookies(["bycoders_test_token"]);
   const [storeName, setStoreName] = useState("ALL");
   const [data, setData] = useState([]);
@@ -64,6 +66,7 @@ export function StoreProvider({ children }: StoreProviderProps) {
         getCnabsBy(storeName);
       })
     }
+    closeModal();
   }
 
   return (
